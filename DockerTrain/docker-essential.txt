@@ -1,0 +1,119 @@
+GODFRED--> 11
+
+CAN YOU SETUP 10 SERVERS?
+10 PHYSICAL SERVER --> 10 CPU + 10 RAM + 10 MB + 10 HDD
+
+10 OS - 10 LICENSE
+
+10 WEBLOGIC -- 10 LICENSE
+
+Install 10 times a Softx
+
+DONE
+
+AVG UTILIZATION - 15% == 85% of the resources are getting waste
++
+10 LICENSE OS
++
+
+Setup - 1 MONTH
+
+-------------------------------
+1. Waste of the resources
+2. HUGE growth in the deamnds.
+
+40GB hDD --> 1 TB
+1 GB --> GMAIL
+15 GB
+=============================VIRTUALIZATION==========================
+1 PHYSICAL -->10 VMS --> 10 OS --> 10 APP
+HYPERVISOR - LICENCE
+VMWARE More
+VIRTUALBOX CPU
+IEX MEMODY
+HDD
+
+CONSUME
+MORE MEMORY + CPU
+
+TIME
+=======================CONTAINERIZATION===============================
+CONTAINERS ENGINE - 1 OS can run 10 Container --- 10 APP
+LESS MEMORY
+LESS CPU
+
+Containerization tool - Docker
+
+How to start working with Docker?
+DOCKER ENGINE
+IMAGE --> REGISTRY OR HUB
+COntainer (Running state of the image)
+
+One Image ---> 1000s of Container(100 APPS) -- 1000 secs --LIMIT(ONly HARDWAre)
+
+BASE (RHEL)(DOCKER ENGINE) --> ONE BASE --> MULTIPLE jenkins
+RHEL
+UB -- 100 APP oF jenkins + 100 snrqube
+WINDOW
+
+ENGINE (ANY PLATFORM + ANY OS) ---> BASE IMAGE(UB+RHEL+CEN+WINDOWS+MAC) -- APP(BASED ON BASE IMAGE)
+
+openjdk:8-jdk(Base Image) --(UB Image + JDK) --> INSTALL JENKINS --CRETE ONE NEW IMAGE(JENKINS)
+NEXUS
+SONARQUBE -- 100 SERVERS
+
+CREATOR --- SOFTX into image --
+UB+JDK+JBOSS+SOFTX -softxj
+RHEL +JDK + WEL+ SOTX -- softxwl
+INterdep of images.
+
+Docker Commands
+=====================================
+To see the docker info
+> docker info
+
+To see the Docker images
+> docker images
+
+To pull the docker images from hub
+> docker pull imagename
+
+How to run the images?
+> docker run -d -p 8080:8080 -p 50000:50000 jenkins
+> docker run -d -p 8090:8080 -p 50001:50000 jenkins
+external:internal external:internalr
+
+How to see number of running containers?
+> docker ps
+
+How to see all containers?
+> docker ps -a
+
+how to stop the container?
+> docker stop container_id
+
+How to start the conatiner?
+> docker start container_id
+
+How to get inside the container?
+> docker exec -it ea646fd7bc38 /bin/bash
+
+How to come out of containr?
+> Ctrl+ p + q
+
+> docker rm container_id
+> docker rmi image_id
+
+docker run --link
+
+DOCKER ENGINE(IP) --> docker0(bridge) --> PORTS of Container
+
+docker run -it --name sandbox2 -h sandbox2 --link sandbox1:sandbox1 linuxconfig/sandbox /bin/bash
+
+UB --> JDK --> TOMCAT --> SOFTX
+
+Download the base image of UB - FROM ubuntu:14:0
+Install JDK
+Install tomcat
+Install SoftX
+--------------------------docker file --> build --> Images --> RUn --> Container

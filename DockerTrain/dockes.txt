@@ -1,0 +1,35 @@
+Nexus
+Jira
+Jenkins
+
+Wordpress
+Joomla
+
+docker run -d -p 8090:8080 jenkins
+docker run -d -p 8080:8080 -p 50000:50000 jenkins
+docker run -d -p 49001:8080 -v $PWD/jenkins:/var/jenkins_home -t jenkins
+192.168.43.37 
+
+Mapping port 8080 on the host to the container (the web ui), port 50000 to port 50000 (for build agents). Run with `-p 50000:50000` so you can connect JNLP slaves. For port 50000. This is to handle connections from JNLP based build slaves.
+
+This will store the workspace in /var/jenkins_home. All Jenkins data lives in there - including plugins and configuration.
+> docker run -d -p 8080:8080 -p 50000:50000 jenkins
+ 
+This will store the jenkins data in /your/home on the host. Ensure that /your/home is accessible by the jenkins user in container (jenkins user - uid 1000) or use -u some_other_user parameter with docker run.
+> docker run -p 8080:8080 -p 50000:50000 -u root -v $PWD/jenkins:/var/jenkins_home jenkins
+
+Other Example:
+docker run -d -p 49001:8080 -v $PWD/jenkins:/var/jenkins_home -t jenkins -u root
+
+How to see the Jenkins log?
+> docker exec name tail -f /var/log/jenkins/jenkins.log
+Where name = --name
+
+docker exec check tail -f /var/log/jenkins/jenkins.log
+
+
+docker run -d -p 8080:8080 -p 50000:50000 --name=check jenkins
+
+How to build images?
+http://shashikantjagtap.net/get-started-with-brand-new-jenkins-2-0-with-docker/
+

@@ -1,0 +1,79 @@
+What is docker?
+Docker is technology which enables the container concept...
+
+Why do we need docker?
+
+1 APP --> 1 Server (Physical Server)- 10 to 20% == 80%
+
+Virtualization - One physical - 10 VMS - 25 App Containers
+
+HARDWARE --> OS --> HYPERVISOR --> VMS --> OS --> APP = 50 to 60% = 40% WASTE
+NA	     NA		HEAVY	          HEAVY
+
+CPU + HDD + RAM + OS ==  
+
+==
+Container technology
+	Light weight
+
+===========================================================
+Docker Engine	
+Images
+Container
+Hub | Repo | Repos | Registry
+====================================
+How can we install engine?
+> apt-get install docker.io
+> yum install docker-engine | docker
+> msi
+
+How to verify?
+> docker -v
+
+How can you start the docker services?
+> service docker start
+> systemctl start docker
+> open a app-
+
+How to download images?
+============================
+docker pull image
+
+How to run the imags?
+============================
+docker run -p -d -it
+
+How many docker container?
+=============================
+docker ps
+docker ps -a
+
+============
+How many docker imaages
+> docker images
+
+How many images and how many containers..
+============================
+docker info
+
+docker help
+
+exit
+
+ctrl + p + q
+
+
+
+
+
+
+
+
+Questions?
+Container - Docker - Container - CPU + RAM + HDD + OS
+Virtulization - Vagrant - Managing Virtual Machines
+
+
+
+
+

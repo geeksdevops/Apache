@@ -1,0 +1,122 @@
+Questions
+===========================
+TUTORAIL - http://www.devopsschool.com/tutorial/
+SIDES - http://www.devopsschool.com/slides/
+QUIZ- http://www.devopsschool.com/quiz/
+NOTES - http://www.devopsschool.com/notes/
+KIT - http://www.devopsschool.com/firstdaykit/index.html
+
+DOCKER
+============================
+
+DOCKER ENGINE === SOFTWARE  ===DONE
+IMAGE	= maven,lamp, jenkins, elastic
+REPO	= PVT(NEXUS) + PUB (https://hub.docker.com/)
+CONTAINER = RUNNING STATE OF THE IMAGES ==> APP
+
+First command?
+> docker info
+> docker -v
+
+How to know list of Images?
+> docker images
+
+How to pull images?
+> docker pull jenkins
+
+How to get containers?
+> docker run -p 8080:8080 -p 50000:50000 jenkins
+> docker run -p 8081:8080 -p 50001:50000 jenkins
+> docker run -d -p 8082:8080 -p 50002:50000 jenkins
+
+-p 8080:8080
+EXTERNAL:INTERNAL
+
+How to get the running container list?
+> docker ps
+
+How to get inside the container?
+> docker exec -it cont-id /bin/bash 
+
+How to come out of the container without exiting?
+> ctrl + p + q
+
+How to list out running containers + exiting
+> docker ps -a
+
+How to stop the container?
+> docker stop cont_id
+
+How to start the container?
+> docker start cont_id
+
+How to remove the container?
+> docker rm cont_id
+
+How to remove images?
+> docker rmi image/image-id
+
+How to see the proess of container?
+> docker top cont_id
+
+How can see running log inside a container?
+> docker logs cont_id
+
+How to store data out of containers?
+> docker run -d -p 8084:8080 -p 50004:50000 -v /root/jen:/var/jenkins_home jenkins
+
+IMPORTANT=====
+EACH CONTAINER HAS TO BE ALIVE WITH LIVE AND ACTIVE PROCESS
+	IF there is NO LIVE AND ACTIVE PROCESS ATTACHED TO IT, IT DIES
+
+ONE CONT == 2 APP == YES
+	BUT only one will be ACTIVE AND ALIVE
+
+LIVE AND ACTIVE - /bin/tini", "--", "/usr/local/bin/jenkins.sh
+
+JENKINS
+=============
+OS --> JDK --> JENKINS
+
+
+Jenkins - 8080 - Container ip:8080
+
+nexus - 8090 - Container - ip:8090
+	mysql:3306
+	jbss - 655
+
+		ip:3306
+===============================
+
+docker run -it --rm --name my-maven-project -v "$PWD":/usr/src/mymaven -w /usr/src/mymaven maven:3.2-jdk-7 mvn clean install
+
+HOST MACHINE -- THERE IS NO MAVEN & JDK
+
+======================================
+How to create images?
+	EXISTING CONTAINER
+	docker commit -m "first image" -a "Rajesh Kumar" 01c62f4f4d9e rajesh
+
+	SCRATCH
+	Dockerfile
+
+FROM ubuntu
+MAINTAINER Rajesh Kumar <rajesh@scmgalaxy.com>
+RUN apt-get update && apt-get install -y git
+RUN mkdir /tmp/bmc.txt
+
+docker build -t rajesh1 .
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

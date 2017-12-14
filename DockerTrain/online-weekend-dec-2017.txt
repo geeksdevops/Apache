@@ -1,0 +1,289 @@
+What is Docker?
+	Self Contained Light weight Virtual Box
+	Run the application within the container in host 
+	Same container with diff OS | machine
+
+=================================================
+1990s ----- physical server
+=========================================
+I need to setup 10 SERVERS.
+-------------------------------------
+BUY 10 PHYSICAL SERVERS
+		-- 10 CPU
+		-- 10 RAM
+		-- 10 HHD
+		-- 10 OS
+-------------------------------------	
+		10 servers is up and runnig
+
+UTIZATION - 10%/ 15% --- WASTE 85%
+------------------------------------------
+WE were using the desktop for everythig...
+		1 GB ---> 15GB
+		GMAIL - 10M ---- 1000M
+		Youtube ---> UNLIMIDATE VIDEO---1000m --uploadng
+		IRCTC ---> RAIL
+		YATRA
+		HDFC
+		ICICI
+		WATSAPP
+		fACEBOOK - MILLION OF IMAGES..
+=====================================
+CHALLNEGES FOR ORG
+===============================
+FREE
+
+10 SERVER - YOUTUBE
+100 SERVER
+1000000000000 SERVERS
+==================================
+COST 
+CPU | RAM | HDD | OS | POWER | SALARY | 
+=====================================================
+=================================================
+1990s ----- vIRTULIzation
+=========================================
+10 SERVERS
+
+1 SERVER ---->  10 VM (10(1) CPU + 10(1) RAM + 10 OS + 10HDD(1))
+
+=========================
+Utlization - 50% -- 60%
+
+How the virtulization - --- HYPERVIOR -> vmware, virtUALBOX, ZEN,
+==============================================================================
+
+
+SERVER
+		LIGHWIEGHT
+		EASY
+		EASY TO FORGET
+		LESS COTLY
+		LESS CONSUM CPU, RAM
+=================================================================
+CONTAINERIZATION????
+		
+OS is worth ---> CPU + RAM + HDD + LICENCE
+
+Can you get rid of the OS? - NO
+Can you get rid of heavy OS - YES
+
+OS -- INPUT --> PROCESS - OUTPUT (KERNAL)
+			LESS CPU
+			LESS RAM
+			LESS HDD
+			NO LICNEC
+
+========================================
+IN THIS ERA
+---------
+VALUE OF THE SERVER IS LESSS.....
+# OF SERVERS IS IMPORTANT
+
+1M -- 1K(BAD)-- DONT WANT TO DEBUG
+REPLACE 1K in oNE SEC...
+==========================================================
+
+HOW DOCKER WORKS???
+	- YOU WILL GET CONFUSED
+	- KERNEL
+	- NAMESPACE
+	- CGROUPS
+	- CAPABILITY
+	- USER SPACE
+	- LAYERS OF OBJECT
+	- INTERNAL OF OS
+READNG A BOOK WHICH IS TALKING HARD N OS LEVEL....
+
+DOCKER WORKFLOW
+================================================
+DOCKER ENGINE		- A light weight software which creates/manage containers
+DOCKER IMAGE		- A App which you want to run in Container?
+DOCKER CONTAINER	- A container is running state of the image
+DOCKER REGISTRY		- A Place where you get IMAGEs
+
+CAN WE FOCUS ON APP OR SOFTWARE WHICH YOU WANT TO RUN.....
+		================
+NOT SERVERS..
+	COZ SEVERS ARE MEANINGLESS IN CONTAINIZATION ERA
+
+Q. How to install docker engine?
+WINDOWS | LINUX  | MAC
+
+Docker has been developed for Linux only...
+	MAC --- NIX(Unix)
+	WINDOWS KERNAL(Dummy VM) -- IMAGE--> DOCKER TOOLBOX
+	Windows 2016 --- Container ----
+
+Demo in Linux
+======================
+ALL THE COMMANDS ARE SAME IN LINUX, WINDOWS, MAC
+
+How to install Docker Engine?
+http://www.devopsschool.com/tutorial/docker/docker-install-and-configuration.html
+
+How to verify docker installation?
+> docker 
+> docker -v
+
+Which is the first commands?
+> docker info	
+
+BASIC WORKFLOW
+=================================
+RUN A APP?
+
+Where is images? its on registry?
+https://hub.docker.com/
+
+What App you want to run?
+> jenkins
+
+How to donwload images?
+> docker pull jenkins/jenkins
+
+How to see # of Images?
+> docker images
+
+How to run the images-- Which will become a container?s
+> docker run
+> docker run -d -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts
+> docker run -d -p 8081:8080 -p 50001:50000 jenkins/jenkins:lts
+> docker run -d -p 8082:8080 -p 50002:50000 jenkins/jenkins:lts
+
+jenkins/jenkins:lts
+jenkins --- USER NAME ON DOCKER HUB
+jenkins - IMAGE NAME OF DOCKER HUB
+:lts - tag name
+
+8080 is the default port for the jenkins
+-p 8080:8080 [external:internal]
+50000 is the default port for jekins node
+-p 50000:50000[external:internal]
+
+How to see number of containers running?
+> docker ps
+> docker ps -a # all incuding stop
+
+How to get insdie a container?
+1. docker exec
+2. docker attach
+> docker exec -it <<conta-id>> <<where-u-want-go>>
+> docker exec -it ca8d093871cf /bin/bash
+
+How to come out of docker container without exiting?
+> ctlr P + Q
+
+How to remove a container?
+> docker rm <conti-id>
+
+How to stop a container?
+> docker stop <<cont-id>
+
+How to start the container?
+> docker start <<ccont-id>>
+
+How to download ubuntu?
+> docker pull ubuntu
+
+How to start ubuntu as a container?
+> docker run -it ubuntu /bin/bash
+> docker exec -it 4e9770b855cb /bin/bash
+> docker attach 4e9770b855cb
+
+How to copy files from Host machine to container?
+> docker cp
+> docker cp rajesh.txt 4e9770b855cb:/opt
+
+How to see history of the images?
+> docker history <<images-id>>
+
+How to see more info about image/container?
+> docker inspect
+> docker inspect <<cont-id>>
+> docker inspect <<img-id>>
+> docker inspect <<network>>
+
+How to see the logs of the container?
+> docker logs
+
+How to delete the images?
+> docker rmi <<image-name>>
+
+
+why we don'tneed /bin/bash for attach?
+-----------------------------------------
+docker exec --> always get inside into the container with new terminal...         
+docker attach --> always is get inside to the container to default using which its running already
+
+How to build Images?
+1. docker build
+2. docker commit
+
+Method 1 - Build a images from existing container?
+> docker commit 4e9770b855cb scmgalaxy:ral1.0
+
+
+Method 2- Build a Imges frm Scractch (dockerfile)
+> docker build
+
+ADD|COPY	-- Add a file from host machine to the images...
+CMD		-- run the command
+ENTRYPOINT	-- specify if you want to run any cmmands during the container running
+ENV		-- Set a env in cont	
+EXPOSE		- set the port 
+FROM		- Base OS
+MAINTAINER	- Who are yoou?
+RUN		- Commannd during the image creation
+USER		- running the container using this user
+VOLUME		- Attach a vol in conainer
+WORKDIR		- Set the cont work dir
+
+
+CMD						RUN
+===============================================================
+run during the container			run during the image creation
+
+What is ENTRYPOINT? 
+This holds the container always in the running state....
+
+Each container must have one ps should be in running state n part of entrypoint...container will not run of entry point is not there...
+
+cmd wget dffssf
+/var/lib/tomcat -start
+> docker build scmgalaxy/git:1.0 .
+
+==========================================
+QUESTIONS ----
+
+LIMITATIION
+
+How to create images/run containers/map/mount/netwwork/link setup??
+no 100s commands....
+> answer ----> docker compose
+
+100000 of 1000 severs.... for Data centers
+
+How to use docker for data centers?
+> kubernetes or Docker swarm
+
+
+How to link one container to another ?
+
+--link
+
+RUN -----RUN THE COMMAND DURING IMAGE CREA
+CMD  -- RUN THE COMMAND DURING CONTAINER CREATION
+ENTRY -- KEEP RUNNING AFTRE CONTAINER CREATION....
+
+
+
+ARG  setting up the variable inside the dockerfile to be used somehwre in the dockerfile
+
+and ENV -- whatever you set,,it will be set in the containers also...
+
+
+
+
+
+

@@ -1,0 +1,342 @@
+You need to know 4 Importants elements to use Docker
+1. Docker Engine 	=== Is a softare which enables and run Container?
+2. Docker Images	=== Application Images
+3. Docker Container	=== Running state of the Image
+4. Docker Repo 		=== PVT + PUB (hub.docker.com)
+
+=====================
+APP -> 
+nexus
+jenkins
+
+Step 1 - Installing Docker Engine
+http://www.devopsschool.com/tutorial/docker/docker-install-and-configuration.html
+
+Step 2 - Getting the Images from hub.docker.com
+docker pull image-name
+
+Step 3 - Running the App.(Container)
+> docker run
+> docker run -d -p 8081:8081 --name nexus sonatype/nexus:oss
+
+How to know the of system info where docker engine is installed?
+> docker info
+
+How to pull the images?
+> docker pull image-name
+
+How to know number of images?
+> docker images
+
+Location of the images == /var/lib/docker
+
+How to run the container?
+> docker run -p 8085:8080 -p 50005:50000 jenkins
+
+How to run container in detahced mode?
+> docker run -d -p 8095:8080 -p 50006:50000 jenkins
+
+How to know the running container?
+> docker ps
+
+How to know running and stopped container?
+> docker ps -a
+
+JENKINS - SERVER-AGENT
+	  8080-50000
+
+8080:8080 === external:internal
+
+How to pass the name of container?
+> 
+
+ -d -p 8080:8080 -p 50001:50000 --name siemen-ci jenkins
+
+How to stop the container?
+> docker stop cont_id
+
+How to remove the container?
+> docker rm cont_id
+
+How to start the container?
+> docker start cont_id
+
+How to get inside the container?
+> docker exec -it cont_id /bin/bash
+
+
+CRTL + P + Q === Come out of container safly.
+
+How to know the running process in the container?
+> docker top cont_id
+
+How to remove the images?
+> docker rmi image-name
+
+How to check the running logs of the containers?
+> docker logs cont_id
+
+How to copy a files from local to container?
+> docker help cp
+
+How to kill containers?
+> docker kill cont_id
+
+How to see port mapping for each containers?
+> docker port cont_id
+
+How to renname a container?
+> docker rename cont_idWW NEW_NAME
+
+LAB 1
+https://goo.gl/k8DX7v
+
+ATTACHING VOLUMES
+==================================
+docker run -d -p 8080:8080 -p 50000:50000 -v /opt/jenkins:/var/jenkins_home jenkins
+
+
+Create Images
+====================METHOD 1============================
+
+docker run -it ubuntu /bin/bash
+apt-get update
+apt-get install git
+
+exit
+
+docker commit -m "my first image" -a "Rajesh Kumar" cont_id image-name
+
+
+====================METHOD 2============================
+
+mkdir sinatra1
+cd sinatra1
+touch Dockerfile
+
+FROM ubuntu
+MAINTAINER Rajesh Kumar <rajesh@scmgalaxy.com>
+RUN apt-get update && apt-get install -y git
+RUN mkdir /tmp/siemens.txt
+
+docker build -t sie2 .
+
+
+===================2 IMPORTANT DOCKER IMAGE COMMANDS=============
+> docker inspect image-name
+> docker history image-name
+
+LAB 2
+======================
+LAB on Creating Image using Dockerfile
+
+1. Base as Centos
+2. Install httpd		#systemctl install httpd
+3. Copy index.html into /var/www/html
+4. EXPOSE the 80 PORT
+5. ENTRY POINT - "systemctl start httpd"
+
+SOLUTION _ https://github.com/CentOS/CentOS-Dockerfiles/tree/master/httpd/centos7
+
+Reference = http://www.devopsschool.com/tutorial/docker/labs/create-docker-image3.html
+SAMPLE - https://github.com/jenkinsci/docker/blob/587b2856cd225bb152c4abeeaaa24934c75aa460/Dockerfile	
+
+================================================
+docker run -it --privileged -e "container=docker" -v /sys/fs/cgroup:/sys/fs/cgroup sie8
+
+
+REVIOSION
+=========================================================
+docker build
+docker logs
+docker ps
+docker ps -a
+docker start
+docker run -it image-id /bin/bash
+docker rmi 
+docker port 
+docker stop
+docker exec
+docker attach
+docker pull
+docker commit
+docker kill 
+docker rm 
+docker rename 
+docker pause
+docker history
+docker cp
+docker inspect
+docker build
+docker help
+docker top
+docker run --rm ubuntu env
+			ls
+			pwd
+
+====DOCKER IN WINDOWS=================
+docker --version
+
+docker-compose --version
+
+docker-machine --version
+
+docker version
+
+docker ps
+
+docker info 
+
+docker run hello-world
+
+docker run -it ubuntu bash
+
+docker run -d -p 80:80 --name webserver nginx
+	Point your web browser at http://localhost to display the start page.
+
+docker ps
+
+docker stop webserver
+
+
+LAB 1
+=============
+Pull a Docker image which you can use to run a Windows container:
+> docker image pull microsoft/windowsservercore
+> docker container run microsoft/windowsservercore hostname
+> docker run –it microsoft/windowsservercore cmd.exe
+> docker exec <container name> ipconfig
+
+Lab 2 -Create Test Image
+============-
+
+Dockerfile
+
+FROM microsoft/windowsservercore
+CMD echo Hello World!
+
+> docker build -t windows-test-image –
+> docker run windows-test-image
+
+Lab 3 
+===========
+Download https://github.com/dockersamples/dotnet-album-viewer
+cd dotnet-album-viewer 
+docker-compose build
+docker-compose up –d
+docker container inspect
+The container for the web application maps to port 80 on the host, so from a different machine you can browse to your host address and see the site:
+
+
+	
+DOCKER COMPOSE - LAB - https://goo.gl/mPcxdV
+=========================================
+web:
+  image: wordpress
+  links:
+    - mysql
+  environment:
+   - WORDPRESS_DB_PASSWORD=sample
+  ports:
+   - "127.0.0.3:8080:80"
+mysql:
+  image: mysql:latest
+  environment:
+    - MYSQL_ROOT_PASSWORD=sample
+    - MYSQL_DATABASE=wordpress
+
+https://docs.docker.com/compose/install/#install-compose
+sudo curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+sudo curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` -o /usr/bin/docker-compose
+sudo chmod +x /usr/bin/docker-compose
+
+web:
+  image: wordpress
+  links:
+    - mysql
+  environment:
+   - WORDPRESS_DB_PASSWORD=sample
+  ports:
+   - "127.0.0.3:8080:80"
+mysql:
+  image: mysql:latest
+  environment:
+    - MYSQL_ROOT_PASSWORD=sample
+    - MYSQL_DATABASE=wordpress
+
+jenkins:
+  image: jenkins
+  ports:
+   - "8085:80"
+   - "50000:50000"
+  networks:
+   - "seimen1"
+    
+networks:
+  default:
+    # Use a custom driver
+    driver: custom-driver-1
+=============================================
+export PATH=$PATH:/usr/local/bin/
+
+
+======DOCKER COMPOSE LAB 2 =================
+$ mkdir composetest
+$ cd composetest
+
+FILE NAME = app.py
+------------------------------------------
+from flask import Flask
+from redis import Redis
+
+app = Flask(__name__)
+redis = Redis(host='redis', port=6379)
+
+@app.route('/')
+def hello():
+    count = redis.incr('hits')
+    return 'Hello World! I have been seen {} times.\n'.format(count)
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", debug=True)
+-----------------------------------------
+
+FILE NAME = requirements.txt
+-----------------------------------------
+flask
+redis
+
+FILE NAME - Dockerfile
+-----------------------------------------
+FROM python:3.4-alpine
+ADD . /code
+WORKDIR /code
+RUN pip install -r requirements.txt
+CMD ["python", "app.py"]
+-----------------------------------------
+
+FILE NAME - docker-compose.yml
+-----------------------------------------
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+     - "5000:5000"
+  redis:
+    image: "redis:alpine"
+-----------------------------------------
+
+LAST COMMAD $ docker-compose up -d
+
+Enter http://0.0.0.0:5000/
+
+
+
+
+
+
+
+
+
+

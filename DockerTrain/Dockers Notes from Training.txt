@@ -1,0 +1,13 @@
+Re: [jenkinsci/docker] Cannot update or change config manualy (#64)
+
+This worked for me
+
+docker exec -u root -it [container_id] bash
+
+===================
+IPv4 issue
+Issues -  
+---> [Warning] IPv4 forwarding is disabled. Networking will not work.
+
+Fix
+sysctl -w net.ipv4.ip_forward=1

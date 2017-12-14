@@ -1,0 +1,118 @@
+Docker
+
+Install docker
+http://www.devopsschool.com/tutorial/docker/docker-install-and-configuration.html#Install
+
+How to verify docker client?
+> docker info
+> docker -v
+
+How to verify docker daemon?
+> docker pull jenkins
+
+How to get the number of images?
+> docker images
+> docker info
+
+How to run the images?
+> docker run
+> docker run -d -p 8080:8080 -p 50000:50000 jenkins
+
+How to see the number of running containers?
+> docker ps
+
+How to get inside the container?
+> docker exec -it 824719a76622 /bin/bash
+
+How to come out of container without existing container?
+> CTRL + P + Q
+
+How to run another container using the same image?
+> docker run -d -p 8090:8080 -p 50001:50000 jenkins
+
+How to stop the containers?
+> docker stop cont_id
+
+How to start the containers?
+> docker start cont_id
+
+How to see the number of process running inside the containers?
+> docker top cont_id
+
+How to see all the exited containers?
+> docker ps -a
+
+How to delete a containers?
+> docker rm cont_id
+
+How to see the history of the images?
+> docker history image-name
+
+How to delete images?
+> docker rmi image_name
+
+How to see the logs of running containers?
+> docker logs cont_id
+
+How to copy the files from Local machine to Containers?
+> docker cp foo.txt mycontainer:/foo.txt
+
+How to copy the files from containers to current location?
+> docker cp mycontainer:/foo.txt foo.txt
+
+> docker cp qualcomm.txt cecff1003f27:/qualcomm.txt
+> docker cp cecff1003f27:/qualcomm.txt qualcomm1.txt 
+
+
+How to stop all the runnnin containers?
+>docker stop $(docker ps -a -q)
+
+How to delete all stop containers?
+> docker rm $(docker ps -a -q)
+
+
+===========================DAY 2===========================
+
+
+One process per Container
+==============================
+> docker run -d ubuntu /bin/bash -c "ping 8.8.8.8 -c 30"
+
+> docker ps 
+
+> docker top cont-id
+
+> docker ps -a 
+
+The container will "exit" when the process itself exits
+
+
+WORKING WITH CONTAINERS
+==============================
+
+> docker run -d ubuntu:14.04.1 /bin/bash -c "ping 8.8.8.8"
+
+> docker ps
+
+> docker inspect cont-id
+
+> docker attach name-of-container
+& ctrl+c
+
+> docker run --cpu-shares=256
+
+> docker run memory=1g
+
+
+ 
+
+
+
+
+Questions
+How to save configurations outside of containers?
+How the image name is unique in docker hub?
+
+
+
+
